@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Sqlz</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore.js" type="text/javascript"></script>
+    <script src="app.js" type="text/javascript" charset="utf-8"></script>
+
+    <style>
+      body {
+        background-color: papayawhip;
+      }
+      #users li {
+        cursor: pointer;
+        width: 300px;
+        text-align: left;
+      }
+      .selected span {
+        background-color: tomato;
+      }
+
+    </style>
+  </head>
+  <body>
+    <ul id="orders">
+    </ul>
+    <form action="order" method="POST" id="order-form">
+      <input type="text" name="total" />
+      <input type="text" name="userId" class="user-id" style="display:none;">
+      <input type="submit" value="Create Order" />
+    </form>
+    <ul id="users">
+    </ul>
+
+    <form action="user" method="POST" id="user-form">
+      <input type="text" name="firstName" />
+      <input type="text" name="lastName" />
+      <input type="submit" value="Save User" />
+    </form>
+
+    <form action="address" method="POST" id="address-form">
+      <input type="text" name="address1" />
+      <input type="text" name="userId" class="user-id" style="display:none;">
+      <input type="submit" value="Add Address" />
+    </form>
+  </body>
+</html>
