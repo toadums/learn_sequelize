@@ -10,6 +10,7 @@
     <style>
       body {
         background-color: papayawhip;
+        font-family: "Helvetica";
       }
       #users li {
         cursor: pointer;
@@ -18,6 +19,10 @@
       }
       .selected span {
         background-color: tomato;
+      }
+      .msg {
+        font-size: 14px;
+        color: tomato;
       }
 
     </style>
@@ -29,6 +34,7 @@
       <input type="text" name="total" />
       <input type="text" name="userId" class="user-id" style="display:none;">
       <input type="submit" value="Create Order" />
+      <span class="msg"> Click a user in the list above first </span>
     </form>
     <ul id="users">
     </ul>
@@ -44,12 +50,14 @@
       <input type="text" name="lastName" />
       <input type="text" name="userId" class="user-id" style="display:none;">
       <input type="submit" value="Update User" />
+      <span class="msg">Click a user in the list above first</span>
     </form>
 
     <form action="address" method="POST" id="address-form">
       <input type="text" name="address1" />
       <input type="text" name="userId" class="user-id" style="display:none;">
       <input type="submit" value="Add Address" />
+      <span class="msg">Click a user in the list above first</span>
     </form>
   </body>
 </html>

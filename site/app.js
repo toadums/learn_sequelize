@@ -58,7 +58,6 @@ $(function(){
       lastName: this.lastName.value
     };
 
-
     $.ajax({
       url: "user/" + this.userId.value,
       type: "PUT",
