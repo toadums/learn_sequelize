@@ -50,4 +50,23 @@ $(function(){
     });
   });
 
+  $("#user-update").on("submit", function(e) {
+    e.preventDefault();
+
+    var data = {
+      firstName: this.firstName.value,
+      lastName: this.lastName.value
+    };
+
+
+    $.ajax({
+      url: "user/" + this.userId.value,
+      type: "PUT",
+      data: data,
+      dataType: "json"
+    });
+
+  });
+
+
 });

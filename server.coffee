@@ -18,6 +18,10 @@ User = seq.define 'user',
   lastName:
     type: Sequelize.STRING
     field: 'last_name'
+    validate:
+      notFail: (value) ->
+        if value is 'fail'
+          throw new Error("Last name cannot be fail")
 
   defaultAddress:
     type: Sequelize.STRING
@@ -32,7 +36,13 @@ Order = seq.define 'order',
 , freezeTableName: true
 
 Address = seq.define 'address',
-  address1: Sequelize.STRING
+  address1:
+    type: Sequelize.STRING
+    validate:
+      notFail: (value) ->
+        if value is 'fail'
+          throw new Error("Address cannot be 'fail")
+
 , freezeTableName: true
 
 Order.belongsTo User
@@ -78,24 +88,32 @@ app.post '/address', (req, res) ->
       user.save()
 
     .then (user) ->
-      throw new Error("Fail") if data.address1 is "fail"
-
       address = Address.create address1: data.address1
       return [user, address]
 
     .spread (user, addr) ->
       user.addAddress(addr)
 
-  # The following could also be written:
-  # addAddress(
-  #   (result) -> console.log "Address Successfully Added"
-  #   (err) -> console.log "ADDRESS FAILED TO ADD", err
-  # )
-
-
   addAddress.then (result) ->
     console.log "Address Successfully Added"
 
   .catch (err) ->
     console.log "ADDRESS FAILED TO ADD", err
+
+app.put '/user/:id', (req, res) ->
+  id = parseInt(req.params.id || 0)
+  data = req.body
+
+  console.log data, "@@"
+
+  User.findOne(where: {id: id})
+  .then (user) ->
+    user.firstName = data.firstName if data.firstName
+    user.lastName = data.lastName if data.lastName
+
+    user.save()
+
+  .catch (err) ->
+    console.log "USER FAILED TO UPDATE", err
+
 
